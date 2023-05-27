@@ -1,17 +1,16 @@
 package com.example.gcdkeulengspring.service;
 
-import com.example.gcdkeulengspring.domain.User;
-
+import com.example.gcdkeulengspring.domain.AppUser;
 import java.util.List;
 
 public interface UserService {
-    User createUser(User user);
+    AppUser addUser(AppUser appUser);
 
-    User getUserById(Long userId);
+    AppUser getUserById(Long userId);
 
-    List<User> getAllUsers();
+    List<AppUser> getAllUsers();
 
-    User updateUser(User user);
+    AppUser updateUser(AppUser appUser);
 
     void deleteUser(Long userId);
 

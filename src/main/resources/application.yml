@@ -1,0 +1,29 @@
+#springdoc:
+#  swagger-ui:
+#    operationsSorter: method
+#    path: /donfack-documentation
+#    filter: 'true'
+#    tagsSorter: alpha
+#    tryItOutEnabled: 'true'
+#  packages-to-scan: com.example.gcdkeulengspring.contro
+#  api-docs:
+#    path: /donfack-api-docs
+GCD-Keuleng:
+  openapi:
+    prod-url: https://Keuleng-api.com
+    dev-url: http://localhost:8080
+spring:
+  jpa:
+    hibernate:
+      properties:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: create-drop
+    show-sql: 'true'
+  datasource:
+    password: q
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/GCD-Keuleng
+  jwt:
+    secret: SpringSecurityApplication
+server:
+  port: '8080'
