@@ -1,12 +1,15 @@
 package com.example.gcdkeulengspring.service;
 
 import com.example.gcdkeulengspring.domain.AppUser;
+import com.example.gcdkeulengspring.domain.Role;
+import com.example.gcdkeulengspring.repo.RoleRepo;
 import com.example.gcdkeulengspring.repo.UserRepo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +18,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class UserServiceImpl implements UserService  {
+public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
+    private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
 
     private final Date date = new Date();
@@ -24,10 +28,16 @@ public class UserServiceImpl implements UserService  {
     @Override
     public AppUser addUser(AppUser appUser) {
         log.info("Saving new user {} to the database", appUser.getUserName());
-
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUser.setCreatedDate(date);
         return userRepo.save(appUser);
+    }
+
+    @Override
+    public Role saveRole(Role role) {
+        log.info("Saving new Role {} to the database", role.getRoleName());
+
+        return roleRepo.save(role);
     }
 
     @Override
@@ -40,6 +50,12 @@ public class UserServiceImpl implements UserService  {
     public List<AppUser> getAllUsers() {
         log.info("User List {} from the database");
         return userRepo.findAll();
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        log.info("Role List {} from the database", getRoles());
+        return roleRepo.findAll();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.gcdkeulengspring.controller;
 
 import com.example.gcdkeulengspring.domain.AppUser;
+import com.example.gcdkeulengspring.domain.Role;
 import com.example.gcdkeulengspring.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -38,6 +39,20 @@ public class UserController {
     }
 
     @Operation(
+            summary = "Retrieve all Roles from the database",
+            description = "Get all Roles by simple calling the endpoint. The response is User object with all the Roles details",
+            tags = {"Roles", "get"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = AppUser.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
+    @GetMapping("/role")
+    public ResponseEntity<List<Role>> getAllRoles() {
+        return ResponseEntity.ok().body(userService.getRoles());
+    }
+
+
+    @Operation(
             summary = "Create new user in the database",
             description = "Create new user by simple calling the endpoint. Make user to put in the appropriate information",
             tags = {"User", "Post"})
@@ -49,6 +64,20 @@ public class UserController {
     public ResponseEntity<AppUser> createUser(@RequestBody AppUser appUser) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/user").toUriString());
         return ResponseEntity.created(uri).body(userService.addUser(appUser));
+    }
+
+    @Operation(
+            summary = "Create new role in the database",
+            description = "Create new role by simple calling the endpoint. Make role to put in the appropriate information",
+            tags = {"role", "Post"})
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {@Content(schema = @Schema(implementation = Role.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", content = {@Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
+    @PostMapping("/role")
+    public ResponseEntity<Role>saveRole(@RequestBody Role role){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/authority/role").toUriString());
+        return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
     @Operation(

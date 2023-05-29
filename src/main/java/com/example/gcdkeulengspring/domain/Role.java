@@ -1,4 +1,4 @@
-package com.example.gcdkeulengspring.controller;
+package com.example.gcdkeulengspring.domain;
 
 import com.example.gcdkeulengspring.domain.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnore;
