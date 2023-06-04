@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Role> getRoles() {
-        log.info("Role List {} from the database", getRoles());
+        log.info("Role List {} from the database");
         return roleRepo.findAll();
     }
 
