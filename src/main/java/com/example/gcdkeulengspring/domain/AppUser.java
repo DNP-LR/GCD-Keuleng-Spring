@@ -33,4 +33,5 @@ public class AppUser {
     private String resetKey = null;
     private Instant resetDate = null;
 
+
 }

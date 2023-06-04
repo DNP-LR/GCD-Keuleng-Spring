@@ -1,7 +1,9 @@
 package com.example.gcdkeulengspring.service;
 
 import com.example.gcdkeulengspring.domain.AppUser;
+import com.example.gcdkeulengspring.domain.Privilege;
 import com.example.gcdkeulengspring.domain.Role;
+import com.example.gcdkeulengspring.repo.PrivilegeRepo;
 import com.example.gcdkeulengspring.repo.RoleRepo;
 import com.example.gcdkeulengspring.repo.UserRepo;
 import jakarta.transaction.Transactional;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final RoleRepo roleRepo;
+    private final PrivilegeRepo privilegeRepo;
     private final PasswordEncoder passwordEncoder;
 
     private final Date date = new Date();
@@ -41,6 +44,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Privilege savePrivilege(Privilege privilege) {
+        log.info("Saving new Privilege {} to the database", privilege.getPrivilegeType());
+
+        return privilegeRepo.save(privilege);
+
+    }
+
+    @Override
     public AppUser getUserById(Long userId) {
         Optional<AppUser> optionalUser = userRepo.findById(userId);
         return optionalUser.get();
@@ -56,6 +67,13 @@ public class UserServiceImpl implements UserService {
     public List<Role> getRoles() {
         log.info("Role List {} from the database");
         return roleRepo.findAll();
+    }
+
+    @Override
+    public List<Privilege> getPrivilege() {
+        log.info("Privileges List {} from the database");
+
+        return privilegeRepo.findAll();
     }
 
     @Override

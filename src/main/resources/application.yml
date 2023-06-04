@@ -1,11 +1,11 @@
-#springdoc:
-#  swagger-ui:
-#    operationsSorter: method
-#    path: /donfack-documentation
-#    filter: 'true'
-#    tagsSorter: alpha
-#    tryItOutEnabled: 'true'
-#  packages-to-scan: com.example.gcdkeulengspring.contro
+springdoc:
+  swagger-ui:
+    operationsSorter: method
+  #    path: /donfack-documentation
+  #    filter: 'false'
+  #    tagsSorter: alpha
+  #    tryItOutEnabled: 'true'
+#  packages-to-scan: com.example.gcdkeulengspring.controller;
 #  api-docs:
 #    path: /donfack-api-docs
 GCD-Keuleng:
